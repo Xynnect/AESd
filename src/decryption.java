@@ -21,16 +21,20 @@ public class decryption {
 	static String encryptionKey = "1234123412341234";
 
 	public static void main(String[] args) throws Exception {
-		
+		String outputFromFile = readFromFile();
+		if(outputFromFile.equals("EmptyFileException")){
+			System.out.println("You have no text");
+			writingToFile("EmptyFileException");
+		}
+		else if(!outputFromFile.equals("EmptyFileException")){
 		decryptedString = decrypt(readFromFile(), encryptionKey);
-		writingToFile();
+		writingToFile(decryptedString);
+		}	
 
 	}
 	
-	private static void writingToFile() {
+	private static void writingToFile(String content ) {
 		try {
-
-			String content = decryptedString;
 			File file = new File("C:/Users/Xelnect/Desktop/decrypted.txt");
 			// if file doesnt exists, then create it
 			if (!file.exists()) {

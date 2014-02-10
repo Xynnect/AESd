@@ -27,7 +27,7 @@ public class decryption {
 			writingToFile("EmptyFileException");
 		}
 		else if(!outputFromFile.equals("EmptyFileException")){
-		decryptedString = decrypt(readFromFile(), encryptionKey);
+		decryptedString = decrypt(outputFromFile, encryptionKey);
 		writingToFile(decryptedString);
 		}	
 

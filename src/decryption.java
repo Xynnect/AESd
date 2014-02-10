@@ -15,7 +15,7 @@ import com.sun.xml.internal.org.jvnet.staxex.Base64Data;
 public class decryption {
 	
 	private static String input;
-	private static String inputString;
+	private static String inputString = "";
 	private static String decryptedString;
 	static String IV = "AAAAAAAAAAAAAAAA";
 	static String encryptionKey = "1234123412341234";
@@ -55,9 +55,9 @@ public class decryption {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(
-					"C:/Users/Xelnect/Desktop/messageToBeDecrypted.txt"));
+					"C:/Users/Xelnect/Desktop/encrypted.txt"));
 			while ((input = br.readLine()) != null) {
-				inputString = input;
+				inputString += input;
 				System.out.println(input);
 			}
 
@@ -78,7 +78,6 @@ public class decryption {
 		    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
 		    SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
 		    cipher.init(Cipher.DECRYPT_MODE, key,new IvParameterSpec(IV.getBytes("UTF-8")));
-		    System.out.println(cipherText);
-		    return new String(cipherText.getBytes(),"UTF-8");
+		    return new String(cipher.doFinal(Base64.decode(cipherText)));
 		  }
 }
